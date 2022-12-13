@@ -3,7 +3,7 @@ on: [push, repository_dispatch, workflow_dispatch]
 env:
   DOTNET_NOLOGO: true
   OWNER: kaminipandey
-  PACKAGE_NAME: nuget
+  PACKAGE_NAME: OctocatApp
 
 jobs:
   create-and-install:
