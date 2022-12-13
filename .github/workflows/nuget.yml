@@ -1,0 +1,24 @@
+on: [push, repository_dispatch, workflow_dispatch]
+
+env:
+  DOTNET_NOLOGO: true
+  OWNER: kaminipandey
+  PACKAGE_NAME: nuget
+
+jobs:
+  create-and-install:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+          source-url: https://nuget.pkg.github.com/${{ env.OWNER }}/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.READ_PACKAGES_TOKEN }}
+
+      - name: Create a .NET Core console project
+        run: dotnet new console
+
+      - name: Install nuget-publish package
+        run: dotnet add package ${{ env.PACKAGE_NAME }}
